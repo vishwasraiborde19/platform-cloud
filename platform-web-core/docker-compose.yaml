@@ -1,0 +1,14 @@
+version: "3"
+services:
+  platform-web-core:
+    build: .
+    image:  platform-web-core_img:1.0
+    container_name:  platform-web-core_rt
+    ports:
+      - "8080:8080"
+    environment:
+      INFO: "true"
+
+
+
+

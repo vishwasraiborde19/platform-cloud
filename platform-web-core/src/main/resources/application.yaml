@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: platform-web-core
+    version: 1.0
+

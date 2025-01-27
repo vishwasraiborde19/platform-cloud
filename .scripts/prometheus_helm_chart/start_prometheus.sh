@@ -1,0 +1,1 @@
+kubectl port-forward -n monitoring svc/prometheus-kube-prometheus-prometheus 9090:9090
