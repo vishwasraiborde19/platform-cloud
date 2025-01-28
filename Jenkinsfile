@@ -11,7 +11,7 @@ pipeline {
     stage('Checkout') {
       steps {
         // Checkout source code from the repository
-        git url: 'https://github.com/vishwasraiborde19/platform-cloud.git', credentialsId: 'a82e039e-559e-4058-8ddb-da47df0c95d3'
+        git url: 'https://github.com/vishwasraiborde19/platform-cloud.git', credentialsId: 'a82e039e-559e-4058-8ddb-da47df0c95d3', branch: 'main'
       }
     }
 
