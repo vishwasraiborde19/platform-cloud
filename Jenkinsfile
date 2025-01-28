@@ -6,7 +6,7 @@ pipeline {
 
   }
   stages {
-    stage('') {
+    stage('start') {
       steps {
         echo 'starting build'
       }
@@ -14,7 +14,7 @@ pipeline {
 
     stage('git check out') {
       steps {
-        git(url: 'https://github.com/vishwasraiborde19/platform-cloud.git', branch: 'main')
+        git(url: 'https://github.com/vishwasraiborde19/platform-cloud.git', branch: 'main', changelog: true)
       }
     }
 
