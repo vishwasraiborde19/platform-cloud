@@ -29,7 +29,14 @@ pipeline {
 
     stage('Push Docker Image') {
       steps {
-        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+        // Authenticate with Docker Hub or another registry
+        script {
+          // Prompt for Docker password as user input
+          DOCKER_PASSWORD = input message: 'Enter Docker Password', parameters: [password(defaultValue: '', description: 'Docker Password', name: 'DOCKER_PASSWORD')]
+          sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+        }
+
+        // Push the Docker image
         sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
         sh "docker push ${DOCKER_IMAGE}:latest"
       }
