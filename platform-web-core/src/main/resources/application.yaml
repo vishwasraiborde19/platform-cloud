@@ -3,3 +3,8 @@ spring:
     name: platform-web-core
     version: 1.0
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
