@@ -31,10 +31,14 @@ pipeline {
       steps {
         // Authenticate with Docker Hub or another registry
         script {
-          // Prompt for Docker password as user input
+          // Prompt for Docker username and password as user input
+          DOCKER_USERNAME = input message: 'Enter Docker Username', parameters: [string(defaultValue: '', description: 'Docker Username', name: 'DOCKER_USERNAME')]
           DOCKER_PASSWORD = input message: 'Enter Docker Password', parameters: [password(defaultValue: '', description: 'Docker Password', name: 'DOCKER_PASSWORD')]
+
+          // Login to Docker registry
           sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
         }
+
 
         // Push the Docker image
         sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
