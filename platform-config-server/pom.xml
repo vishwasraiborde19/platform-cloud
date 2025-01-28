@@ -114,6 +114,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>platform-config-server</finalName>
     </build>
 
 </project>
