@@ -3,10 +3,13 @@ pipeline {
 	stages {
 		stage('Checkout') {
 			steps {
-				// Checkout source code from the repository
-				JENKINS_CREDENTIALS = input message: 'Enter Jenkins credenctials', parameters: [string(defaultValue: '', description: 'JENKINS_CREDENTIALS ', name: 'JENKINS_CREDENTIALS')]
-				BRANCH_NAME = input message: 'Enter branch e', parameters: [string(defaultValue: '', description: 'BRANCH_NAME ', name: 'BRANCH_NAME')]
-				git url: 'https://github.com/vishwasraiborde19/platform-cloud.git', credentialsId: $JENKINS_CREDENTIALS, branch: $BRANCH_NAME
+				script {
+					// Checkout source code from the repository
+
+					JENKINS_CREDENTIALS = input message: 'Enter Jenkins credenctials', parameters: [string(defaultValue: '', description: 'JENKINS_CREDENTIALS ', name: 'JENKINS_CREDENTIALS')]
+					BRANCH_NAME = input message: 'Enter branch e', parameters: [string(defaultValue: '', description: 'BRANCH_NAME ', name: 'BRANCH_NAME')]
+					git url: 'https://github.com/vishwasraiborde19/platform-cloud.git', credentialsId: $JENKINS_CREDENTIALS, branch: $BRANCH_NAME
+				}
 			}
 		}
 
