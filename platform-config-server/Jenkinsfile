@@ -1,0 +1,61 @@
+pipeline {
+	agent any
+	stages {
+		stage('Checkout') {
+			steps {
+				git url: 'https://github.com/vishwasraiborde19/platform-cloud.git', credentialsId: '144a2a6e-2625-4e8a-879a-8be974d9ca2b', branch: 'main'
+			}
+		}
+
+		stage('Build Maven Project') {
+			steps {
+				dir(path: 'platform-config-server') {
+					sh 'mvn clean package'
+				}
+			}
+		}
+
+		stage('Build and Tag Docker Image') {
+			steps {
+				dir(path: 'platform-config-server') {
+					sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+					sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
+				}
+			}
+		}
+
+		stage('Push Docker Image') {
+			steps {
+				// Authenticate with Docker Hub or another registry
+				script {
+					// Prompt for Docker username and password as user input
+					DOCKER_USERNAME = input message: 'Enter Docker Username', parameters: [string(defaultValue: '', description: 'Docker Username', name: 'DOCKER_USERNAME')]
+					DOCKER_PASSWORD = input message: 'Enter Docker Password', parameters: [password(defaultValue: '', description: 'Docker Password', name: 'DOCKER_PASSWORD')]
+
+					// Login to Docker registry
+					sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+				}
+
+
+				// Push the Docker image
+				sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+				sh "docker push ${DOCKER_IMAGE}:latest"
+			}
+		}
+
+	}
+	environment {
+		DOCKER_IMAGE = 'vishwasraiborde19/platform-config-server-img'
+		DOCKER_TAG = "v${BUILD_NUMBER}"
+	}
+	post {
+		always {
+			cleanWs()
+		}
+
+		success {
+			echo "Pipeline completed successfully! Docker image ${DOCKER_IMAGE}:${DOCKER_TAG} has been pushed."
+		}
+
+	}
+}
