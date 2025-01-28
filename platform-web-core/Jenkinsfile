@@ -45,7 +45,7 @@ pipeline {
 
 	}
 	environment {
-		DOCKER_IMAGE = 'vishwasraiborde19/your-image'
+		DOCKER_IMAGE = 'vishwasraiborde19/platform-web-core-img'
 		DOCKER_TAG = "v${BUILD_NUMBER}"
 	}
 	post {
