@@ -10,7 +10,6 @@
 </head>
 <body>
 <div class="container my-2" align="center">
-
     <h3>Property List</h3>
     <a th:href="@{add}" class="btn btn-primary btn-sm mb-3">Add Property</a>
     <table style="width:100%" border="1"
@@ -35,7 +34,6 @@
             <td th:text="${property.label}"></td>
             <td th:text="${property.propertyKey}"></td>
             <td th:text="${property.value}"></td>
-
             <td><a th:href="@{/update/{id}(id=${property.id})}"
                    class="btn btn-primary">Update</a>
                 <a th:href="@{/delete/{id}(id=${property.id})}"

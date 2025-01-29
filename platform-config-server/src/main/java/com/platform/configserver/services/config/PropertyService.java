@@ -11,4 +11,6 @@ public interface PropertyService {
     Property removeProperty(Property prop);
 
     List<Property> getAll();
+
+    void delete(Long id);
 }
