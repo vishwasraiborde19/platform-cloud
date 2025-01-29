@@ -11,7 +11,7 @@ public class PropertyImpl implements PropertyService {
 
     private final PropertyRepo propertyRepo;
 
-    PropertyImpl(PropertyRepo propertyRepo) {
+    PropertyImpl(final PropertyRepo propertyRepo) {
         this.propertyRepo = propertyRepo;
     }
 

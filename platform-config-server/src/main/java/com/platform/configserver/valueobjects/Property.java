@@ -10,7 +10,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class Property {
-    private Long Id;
+    private Long id;
     private Date createdOn;
     private String application;
     private String profile;

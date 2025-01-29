@@ -1,9 +1,6 @@
 package com.platform.configserver.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -19,10 +16,10 @@ public class Property {
 
     @Id()
     @Column(name="id")
-    private Long Id;
+    private Long id;
 
     @Column(name = "created_on")
-    private Date createdOn;
+    private Date createdOn = new Date();
 
     @Column(name = "application")
     private String application;
@@ -33,7 +30,7 @@ public class Property {
     @Column(name = "label")
     private String label;
 
-    @Column(name = "property_key")
+    @Column(name = "prop_key")
     private String propertyKey;
 
     @Column(name = "value")
