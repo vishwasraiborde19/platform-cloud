@@ -60,7 +60,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>platform-discovery-server.jar</finalName>
+        <finalName>platform-discovery-server</finalName>
     </build>
 
 </project>
