@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.platform</groupId>
-    <artifactId>platform-discovery-service</artifactId>
+    <artifactId>platform-discovery-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>platform-discovery-service</name>
-    <description>platform-discovery-service</description>
+    <name>platform-discovery-server</name>
+    <description>platform-discovery-server</description>
     <url/>
     <licenses>
         <license/>
@@ -52,7 +52,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
