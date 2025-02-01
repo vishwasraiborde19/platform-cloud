@@ -1,0 +1,18 @@
+server:
+  port: 7000
+
+spring:
+  application:
+    name: platform-event-producer-service
+  config:
+    import: optional:configserver:http://192.168.0.7:9001/
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
