@@ -21,8 +21,9 @@ public class KafkaPublisherService {
     }
 
 
-    public void sendToKafka(final Event data) {
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("someTopic","key",data);
+    public CompletableFuture<SendResult<String, String>> sendToKafka(final String topicName , String key , final Event data) {
+        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName,key,data);
+        return future;
     }
 
 }
