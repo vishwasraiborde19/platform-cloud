@@ -1,15 +1,12 @@
-server:
-  port: 7000
-
 spring:
   application:
-    name: platform-event-producer-service
+    name: platform-event-consumer-service
   config:
     import: optional:configserver:http://192.168.0.7:9001/
   boot:
     admin:
       client:
-        url: http://192.168.0.9:9000/
+        url: http://localhost:9000/
 
 management:
   endpoints:

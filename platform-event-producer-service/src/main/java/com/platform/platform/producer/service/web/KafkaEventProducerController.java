@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -20,8 +21,11 @@ public class KafkaEventProducerController {
     }
 
     @PostMapping("/events")
-    public String sendMessage(String topicName, String key, Event<String> event) {
+    public String sendMessage(final String topicName,
+                              final String key,
+                              final Event<String> event) throws ExecutionException, InterruptedException {
         CompletableFuture<SendResult<String, String>> future = kafkaPublisherService.sendToKafka(topicName, key, event);
-        return future.toString();
+        return future.get().toString();
     }
+
 }

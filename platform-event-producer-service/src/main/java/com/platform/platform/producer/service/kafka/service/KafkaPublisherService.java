@@ -10,9 +10,9 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class KafkaPublisherService {
 
-    private final KafkaTemplate kafkaTemplate;
+    private final KafkaTemplate<String,String> kafkaTemplate;
 
-    KafkaPublisherService(KafkaTemplate kafkaTemplate){
+    KafkaPublisherService(KafkaTemplate<String,String> kafkaTemplate){
       this.kafkaTemplate = kafkaTemplate;
     }
 
@@ -22,8 +22,7 @@ public class KafkaPublisherService {
 
 
     public CompletableFuture<SendResult<String, String>> sendToKafka(final String topicName , String key , final Event data) {
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName,key,data);
-        return future;
+        return kafkaTemplate.send(topicName,key,data.toString());
     }
 
 }
