@@ -9,7 +9,7 @@ pipeline {
 
 		stage('Build Maven Project') {
 			steps {
-				dir(path: 'platform-event-consumer-service') {
+				dir(path: 'platform-config-server') {
 					sh 'mvn clean package'
 				}
 			}
@@ -17,7 +17,7 @@ pipeline {
 
 		stage('Build and Tag Docker Image') {
 			steps {
-				dir(path: 'platform-event-consumer-service') {
+				dir(path: 'platform-config-server') {
 					sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
 					sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
 				}
@@ -42,7 +42,7 @@ pipeline {
 
 	}
 	environment {
-		DOCKER_IMAGE = 'vishwasraiborde19/platform-event-consumer-service-img'
+		DOCKER_IMAGE = 'vishwasraiborde19/platform-config-server-img'
 		DOCKER_TAG = "v${BUILD_NUMBER}"
 	}
 	post {

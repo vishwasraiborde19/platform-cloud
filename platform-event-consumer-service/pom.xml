@@ -119,6 +119,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>platform-event-consumer-service</finalName>
     </build>
 
 </project>
