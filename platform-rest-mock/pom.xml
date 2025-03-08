@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.platform</groupId>
-    <artifactId>platform-rest-template</artifactId>
+    <artifactId>platform-rest-mock</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>platform-rest-template</name>
-    <description>platform-rest-template</description>
+    <name>platform-rest-mock</name>
+    <description>platform-rest-mock</description>
     <url/>
     <licenses>
         <license/>
@@ -43,6 +43,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -52,7 +57,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>platform-rest-template</finalName>
+        <finalName>platform-rest-mock</finalName>
     </build>
 
 </project>

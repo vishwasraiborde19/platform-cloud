@@ -1,6 +1,9 @@
+server:
+  port: 4000
+
 spring:
   application:
-    name: platform-web-core
+    name: platform-rest-mock
     version: 1.0
 
 management:
