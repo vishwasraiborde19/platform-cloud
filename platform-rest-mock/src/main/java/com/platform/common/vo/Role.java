@@ -1,4 +1,4 @@
-package com.platform.rest.template.vo;
+package com.platform.common.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class User {
+public class Role {
     private String id;
     private String name;
-    private String email;
 }

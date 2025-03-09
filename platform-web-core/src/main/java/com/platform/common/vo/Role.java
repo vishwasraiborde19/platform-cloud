@@ -1,4 +1,4 @@
-package com.platform.rest.template.vo;
+package com.platform.common.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

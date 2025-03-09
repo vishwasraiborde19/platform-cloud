@@ -1,8 +1,7 @@
 package com.platform.rest.template.controller;
 
-import com.platform.rest.template.vo.Role;
+import com.platform.common.vo.Role;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;

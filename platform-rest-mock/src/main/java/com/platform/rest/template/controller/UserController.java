@@ -1,8 +1,7 @@
 package com.platform.rest.template.controller;
 
-import com.platform.rest.template.vo.User;
+import com.platform.common.vo.User;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,8 +31,8 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public List<User> getUser(@PathVariable String id) {
-        return USERS.stream().filter(user -> user.getId().equals(id)).collect(Collectors.toList());
+    public User getUser(@PathVariable String id) {
+        return USERS.stream().filter(user -> user.getId().equals(id)).findFirst().orElse(null);
     }
 
 
