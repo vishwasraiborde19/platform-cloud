@@ -15,7 +15,7 @@ public class RestProperties {
     public void setTemplateMapping(Map<String, String> templateMapping) {
         this.templateMapping = templateMapping;
         for (Map.Entry<String, String> stringStringEntry : templateMapping.entrySet()) {
-            System.out.println("loaded properties: " + stringStringEntry.getKey() + " = " + stringStringEntry.getValue());
+            System.out.println("RestProperties loaded : " + stringStringEntry.getKey() + " = " + stringStringEntry.getValue());
         }
     }
 

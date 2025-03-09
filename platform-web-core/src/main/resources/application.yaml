@@ -9,7 +9,7 @@ management:
       exposure:
         include: "*"
 
-# pull properties via service name from eureka instead of context path / urls
+# for poc purposes only in real , pull properties via service name from eureka instead of context path / urls
 com:
   platform:
     api:
