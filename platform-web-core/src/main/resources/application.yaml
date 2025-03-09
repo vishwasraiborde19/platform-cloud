@@ -8,3 +8,11 @@ management:
     web:
       exposure:
         include: "*"
+
+# pull properties via service name from eureka instead of context path / urls
+com:
+  platform:
+    api:
+      templateMapping:
+        user: http://localhost:8080/user
+        role: http://localhost:8080/user

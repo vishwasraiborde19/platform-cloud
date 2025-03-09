@@ -20,12 +20,6 @@ public class UserController {
     );
 
 
-    private final RestTemplate restTemplate;
-
-    public UserController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
     @GetMapping("/users")
     public List<User> getUsers() {
         return USERS;

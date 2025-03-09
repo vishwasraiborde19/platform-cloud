@@ -14,15 +14,10 @@ public class RolesController {
 
     private final List<Role> ROLES = Arrays.asList(
          new Role("100","admin"),
-            new Role("200","guest")
+         new Role("200","guest")
     );
 
 
-    private final RestTemplate restTemplate;
-
-    public RolesController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     @GetMapping("/roles")
     public List<Role> getRoles() {

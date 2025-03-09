@@ -1,4 +1,4 @@
-package com.platform.rest.template.config;
+package com.platform.webcore.rest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +9,7 @@ public class RestConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate;
     }
-
-
 }
