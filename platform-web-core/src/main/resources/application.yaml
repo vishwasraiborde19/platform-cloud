@@ -9,6 +9,13 @@ management:
       exposure:
         include: "*"
 
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+
 # for poc purposes only in real , pull properties via service name from eureka instead of context path / urls
 com:
   platform:
