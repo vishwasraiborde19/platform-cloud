@@ -2,6 +2,10 @@ spring:
   application:
     name: platform-web-core
     version: 1.0
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000/
 
 management:
   endpoints:

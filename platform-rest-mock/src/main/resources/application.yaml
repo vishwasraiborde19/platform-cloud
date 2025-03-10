@@ -5,6 +5,10 @@ spring:
   application:
     name: platform-rest-mock
     version: 1.0
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000/
 
 management:
   endpoints:
