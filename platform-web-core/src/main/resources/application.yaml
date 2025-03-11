@@ -6,7 +6,7 @@ spring:
     admin:
       client:
         url: http://localhost:9000/
-
+#actuators
 management:
   health:
     ratelimiters:
@@ -17,48 +17,48 @@ management:
     web:
       exposure:
         include: "*"
-
+#service registry
 eureka:
   client:
     enabled: true
     service-url:
       defaultZone: http://localhost:8761/eureka
     register-with-eureka: true
-
 # resiliency
-resilience4j.timelimiter:
-  instances:
-    timeLimiterService:
-      cancel-running-future: true
-      timeout-duration: 2s
-  metrics:
-    enabled: true
-resilience4j.retry:
-  metrics:
-    enabled: true
-    legacy:
-      enabled: true
-  instances:
-    retryService:
-      max-attempts: 3
-      wait-duration: 1s
-resilience4j.circuitbreaker:
-  instances:
-    circuitBreakerService:
-      failure-rate-threshold: 50
-      minimum-number-of-calls: 3
-      automatic-transition-from-open-to-half-open-enabled: true
-      max-wait-duration-in-half-open-state: 5s
-      permitted-number-of-calls-in-half-open-state: 3
-      sliding-window-size: 10
-      sliding-window-type: count_based
+#https://github.com/resilience4j/resilience4j-spring-cloud2-demo/blob/master/server/src/main/resources/config/client.yml
+#https://refactorfirst.com/spring-cloud-resiliance4j-circuitbreaker-and-retry
 resilience4j.bulkhead:
-  metrics:
-    enabled: true
   instances:
-    bulkheadService:
+    userService:
       max-concurrent-calls: 3
       max-wait-duration: 1
+resilience4j.timelimiter:
+  instances:
+    userService:
+      cancel-running-future: true
+      timeout-duration: 3s
+resilience4j.retry:
+  retry-aspect-order: 2
+  instances:
+    userService:
+      base-config: default
+  configs:
+    default:
+      max-attempts: 3
+      wait-duration: 3s
+resilience4j.circuitbreaker:
+  circuit-breaker-aspect-order: 1
+  instances:
+    userService:
+      register-health-indicator: true
+      event-consumer-buffer-size: 10
+      failure-rate-threshold: 50
+      minimum-number-of-calls: 5
+      automatic-transition-from-open-to-half-open-enabled: true
+      wait-duration-in-open-state: 5s
+      permitted-number-of-calls-in-half-open-state: 3
+      sliding-window-size: 10
+      sliding-window-type: COUNT_BASED
 
 # for poc purposes only in real , pull properties via service name from eureka instead of context path / urls
 com:
