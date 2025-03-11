@@ -8,6 +8,11 @@ spring:
         url: http://localhost:9000/
 
 management:
+  health:
+    ratelimiters:
+      enabled: true
+    circuitbreakers:
+      enabled: true
   endpoints:
     web:
       exposure:
@@ -19,6 +24,41 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
     register-with-eureka: true
+
+# resiliency
+resilience4j.timelimiter:
+  instances:
+    timeLimiterService:
+      cancel-running-future: true
+      timeout-duration: 2s
+  metrics:
+    enabled: true
+resilience4j.retry:
+  metrics:
+    enabled: true
+    legacy:
+      enabled: true
+  instances:
+    retryService:
+      max-attempts: 3
+      wait-duration: 1s
+resilience4j.circuitbreaker:
+  instances:
+    circuitBreakerService:
+      failure-rate-threshold: 50
+      minimum-number-of-calls: 3
+      automatic-transition-from-open-to-half-open-enabled: true
+      max-wait-duration-in-half-open-state: 5s
+      permitted-number-of-calls-in-half-open-state: 3
+      sliding-window-size: 10
+      sliding-window-type: count_based
+resilience4j.bulkhead:
+  metrics:
+    enabled: true
+  instances:
+    bulkheadService:
+      max-concurrent-calls: 3
+      max-wait-duration: 1
 
 # for poc purposes only in real , pull properties via service name from eureka instead of context path / urls
 com:
