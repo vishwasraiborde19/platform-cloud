@@ -1,11 +1,13 @@
 package com.platform.webcore.rest.properties;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.util.Objects;
 
+@Data
 @ConfigurationProperties(prefix = "com.platform.api")
 @Component
 @RefreshScope
@@ -17,10 +19,6 @@ public class RestProperties {
         for (Map.Entry<String, String> stringStringEntry : templateMapping.entrySet()) {
             System.out.println("RestProperties loaded : " + stringStringEntry.getKey() + " = " + stringStringEntry.getValue());
         }
-    }
-
-    public Map<String, String> getTemplateMapping() {
-        return templateMapping;
     }
 
     @Override
