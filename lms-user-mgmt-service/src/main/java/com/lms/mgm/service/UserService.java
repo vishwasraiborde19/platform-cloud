@@ -1,7 +1,8 @@
 package com.lms.mgm.service;
 
 
-import com.common.model.user.UserDTO;
+
+import com.lms.mgm.dto.UserDTO;
 import com.lms.mgm.entity.User;
 import com.lms.mgm.mapper.UserModelMapper;
 import com.lms.mgm.repository.UserRepository;

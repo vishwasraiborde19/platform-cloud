@@ -1,18 +1,12 @@
 package com.lms.mgm.service;
 
-import com.common.model.user.UserDTO;
+
 import com.lms.mgm.base.BaseIntegrationTest;
 import com.lms.mgm.base.DataHelper;
+import com.lms.mgm.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.web.reactive.server.WebTestClient;
-import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 import java.util.Optional;

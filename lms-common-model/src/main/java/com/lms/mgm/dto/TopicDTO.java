@@ -1,4 +1,4 @@
-package com.common.model.topic;
+package com.lms.mgm.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

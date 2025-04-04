@@ -1,4 +1,4 @@
-package com.common.model.user;
+package com.lms.mgm.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,6 +1,8 @@
 package com.lms.mgm.base;
 
-import com.common.model.user.UserDTO;
+
+
+import com.lms.mgm.dto.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
