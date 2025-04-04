@@ -1,6 +1,7 @@
 package com.lms.mgm.controller;
 
-import com.common.model.user.UserDTO;
+
+import com.lms.mgm.dto.UserDTO;
 import com.lms.mgm.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
