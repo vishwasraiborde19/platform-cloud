@@ -28,7 +28,7 @@ pipeline {
 			steps {
 				// Authenticate with Docker Hub or another registry
 				script {
-					// Prompt for Docker username and password as user input
+					// Prompt for Docker username and password as userDTO input
 					DOCKER_USERNAME = input message: 'Enter Docker Username', parameters: [string(defaultValue: '', description: 'Docker Username', name: 'DOCKER_USERNAME')]
 					DOCKER_PASSWORD = input message: 'Enter Docker Password', parameters: [password(defaultValue: '', description: 'Docker Password', name: 'DOCKER_PASSWORD')]
 					// Login to Docker registry

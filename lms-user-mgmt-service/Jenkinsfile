@@ -9,7 +9,7 @@ pipeline {
 
 		stage('Build Maven Project') {
 			steps {
-				dir(path: 'platform-web-core') {
+				dir(path: 'lms-user-mgmt-service') {
 					sh 'mvn clean package'
 				}
 			}
@@ -17,7 +17,7 @@ pipeline {
 
 		stage('Build and Tag Docker Image') {
 			steps {
-				dir(path: 'platform-web-core') {
+				dir(path: 'lms-user-mgmt-service') {
 					sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
 					sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
 				}
@@ -31,12 +31,9 @@ pipeline {
 					// Prompt for Docker username and password as userDTO input
 					DOCKER_USERNAME = input message: 'Enter Docker Username', parameters: [string(defaultValue: '', description: 'Docker Username', name: 'DOCKER_USERNAME')]
 					DOCKER_PASSWORD = input message: 'Enter Docker Password', parameters: [password(defaultValue: '', description: 'Docker Password', name: 'DOCKER_PASSWORD')]
-
 					// Login to Docker registry
 					sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
 				}
-
-
 				// Push the Docker image
 				sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
 				sh "docker push ${DOCKER_IMAGE}:latest"
@@ -45,7 +42,7 @@ pipeline {
 
 	}
 	environment {
-		DOCKER_IMAGE = 'vishwasraiborde19/platform-web-core-img'
+		DOCKER_IMAGE = 'vishwasraiborde19/lms-user-mgmt-service-img'
 		DOCKER_TAG = "v${BUILD_NUMBER}"
 	}
 	post {
