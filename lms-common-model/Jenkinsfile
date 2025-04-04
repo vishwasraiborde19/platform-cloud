@@ -22,7 +22,7 @@ pipeline {
 		}
 
 		success {
-			echo "Pipeline completed successfully! Docker image ${DOCKER_IMAGE}:${DOCKER_TAG} has been pushed."
+			echo "Pipeline completed successfully!"
 		}
 
 	}
