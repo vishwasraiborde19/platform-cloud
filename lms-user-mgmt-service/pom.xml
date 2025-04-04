@@ -59,11 +59,13 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
+      <!--
+       TODO: there is need to local repo , will deploy artifactory so jenkins can resolve common custom modules
+       <dependency>
             <groupId>com.lms.commons</groupId>
             <artifactId>lms-common-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
