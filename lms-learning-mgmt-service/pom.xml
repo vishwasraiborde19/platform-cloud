@@ -8,11 +8,11 @@
         <version>3.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.lms.topic</groupId>
-    <artifactId>lms-topic-mgmt-service</artifactId>
+    <groupId>com.lms.learning</groupId>
+    <artifactId>lms-learning-mgmt-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>lms-topic-mgmt-service</name>
-    <description>userDTO-mgmt-service</description>
+    <name>lms-learning-mgmt-service</name>
+    <description>lms-learning-mgmt-service</description>
     <url/>
     <licenses>
         <license/>
@@ -30,19 +30,82 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!--core spring-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.8.4</version>
+        </dependency>
 
+        <!--persistence dependencies-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.46</version>
+        </dependency>
+
+        <!-- transitives -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--
+         TODO: there is need to local repo , will deploy artifactory so jenkins can resolve common custom modules
+         <dependency>
+              <groupId>com.lms.commons</groupId>
+              <artifactId>lms-common-model</artifactId>
+              <version>0.0.1-SNAPSHOT</version>
+          </dependency>-->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <!--Test dependencies-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.14.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mysql</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -74,6 +137,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>lms-learning-mgmt-service</finalName>
     </build>
 
 </project>
