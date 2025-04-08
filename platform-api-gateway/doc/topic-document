@@ -1,0 +1,15 @@
+api gateway
+ - single point of entry for back end service
+ - deconstructing a monolith
+cross cutting concerns
+ - Authentication and security
+ - load balancing
+ - circuit breaking
+ - observability (logging , monitoring, distributed metric)
+ - service discovery
+ - caching
+
+
+  why soru
+
+   the boys had a really good time playing chess today
