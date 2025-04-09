@@ -49,3 +49,10 @@
         I want to control the technical configuration of the platform
         so that , I can control the platform behaviors
 
+
+-- future MMR feature
+    integrate with aws
+    integrate with payment gateway
+    integration with ADFS over social web
+    integration with s3 for storage solution
+    build bulk learning upload  with asyn messaging over kafka
