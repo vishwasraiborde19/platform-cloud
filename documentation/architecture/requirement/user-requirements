@@ -1,0 +1,51 @@
+-- persona client
+
+        As a new client
+        I want to register myself into the task app
+        so that, I can have  login access with the user role
+
+        As a registered-client user
+        I want to login into the application
+        so that, I can access the application with the client role
+
+        As a client-user
+        I want to create a topic
+        so that, I can save and view my learning topic
+
+        As a client-user
+        I want to create a plan
+        so that, I can plan my learning within a time box
+        so that , I can get timely alerts on my learning progress
+
+        As a client-user
+        I want to view the learnings plans shared by other users
+        so that, I an in copy the learning plan and save my config time
+
+-- personal admin user
+        As a admin user
+        I want to create, learning plans and share in the tailored learning market place
+        so that, client users can copy and apply the learning plan
+        so that, the learning plan is ready to use and save client-users time
+
+        As a admin user
+        I want to, update a user as  active/inactive
+        so that, I have operation control on client users
+
+        As an admin user
+        I want to view the analytics report
+        so that, I can understand product trends
+
+        As an admin user
+        I want to control the feature toggle in a intuitive way
+        so that, I can conduct A/B testing and rollout product features
+
+        As an admin user
+        I want to view the click stream data
+        so that , I get a view of the users interactions
+
+
+-- persona operational user
+        As a ops user
+        I want to control the technical configuration of the platform
+        so that , I can control the platform behaviors
+
