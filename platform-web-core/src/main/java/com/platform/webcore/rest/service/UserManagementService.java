@@ -4,10 +4,9 @@ import com.platform.common.vo.User;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -20,8 +19,8 @@ public class UserManagementService {
         this.restTemplate = restTemplate;
     }
 
-    public User getAllUsers() {
-        return restTemplate.getForEntity("http://localhost:4000/v1/users", User.class).getBody();
+    public List getAllUsers() {
+        return restTemplate.getForEntity("http://localhost:4000/v1/users", List.class).getBody();
     }
 
     @Retry(name = "userService")
