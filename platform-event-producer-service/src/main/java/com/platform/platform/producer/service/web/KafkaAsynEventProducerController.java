@@ -1,5 +1,6 @@
 package com.platform.platform.producer.service.web;
 
+import com.platform.platform.producer.service.kafka.service.KafkaAsyncPublisherService;
 import com.platform.platform.producer.service.kafka.service.KafkaPublisherService;
 import com.platform.platform.producer.service.kafka.wrapper.Event;
 import org.springframework.kafka.support.SendResult;
@@ -12,20 +13,19 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/v1")
-public class KafkaEventProducerController {
+public class KafkaAsynEventProducerController {
 
-    private final KafkaPublisherService kafkaPublisherService;
+    private final KafkaAsyncPublisherService kafkaAsyncPublisherService;
 
-    public KafkaEventProducerController(final KafkaPublisherService kafkaPublisherService) {
-        this.kafkaPublisherService = kafkaPublisherService;
+    public KafkaAsynEventProducerController(final KafkaAsyncPublisherService kafkaAsyncPublisherService) {
+        this.kafkaAsyncPublisherService = kafkaAsyncPublisherService;
     }
 
-    @PostMapping("/events/sync")
-    public String sendMessage(final String topicName,
+    @PostMapping("/events/async")
+    public void sendMessage(final String topicName,
                               final String key,
                               final Event<String> event) throws ExecutionException, InterruptedException {
-        CompletableFuture<SendResult<String, String>> future = kafkaPublisherService.sendToKafka(topicName, key, event);
-        return future.get().toString();
+        kafkaAsyncPublisherService.sendToKafka(topicName, key, event);
     }
 
 }
