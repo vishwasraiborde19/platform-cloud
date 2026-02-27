@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-
 @Controller
 @RequestMapping(value = "/properties")
 public class ConfigDataController {
@@ -18,33 +16,31 @@ public class ConfigDataController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping("/view")
-    public String viewProperties(Model model) {
-        model.addAttribute("property", new Property());
+
+    // Modern UI view
+    @GetMapping("/ui")
+    public String modernUI(Model model) {
         model.addAttribute("propertyList", propertyService.getAll());
-        return "addproperty";
+        return "property_modern";
     }
 
-    @GetMapping("/add")
-    public String addConfigData(Model model) {
-        model.addAttribute("property", new Property());
-        model.addAttribute("propertyList", propertyService.getAll());
-        return "addproperty";
+    // Update redirects to modern with an edit query param so the modern UI opens the modal
+    @GetMapping("/update/{id}")
+    public String editProperty(@PathVariable("id") Long id, Model model) {
+        return "redirect:/properties/ui?edit=" + id;
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("property") Property property, Model model) {
+    public String save(@ModelAttribute("property") Property property,
+                       Model model) {
         propertyService.addProperty(property);
-        model.addAttribute("propertyList", propertyService.getAll());
-        return "addproperty";
+        // Always return to modern UI since other UI components are removed
+        return "redirect:/properties/ui";
     }
 
     @GetMapping("/delete/{id}")
-    public String save(@PathVariable(value = "id") long id,
-                       Model model) {
+    public String deleteProperty(@PathVariable(value = "id") long id) {
         propertyService.delete(id);
-        model.addAttribute("property", new Property());
-        model.addAttribute("propertyList", propertyService.getAll());
-        return "redirect:/properties/add";
+        return "redirect:/properties/ui";
     }
 }

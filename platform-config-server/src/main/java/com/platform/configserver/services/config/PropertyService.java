@@ -13,4 +13,7 @@ public interface PropertyService {
     List<Property> getAll();
 
     void delete(Long id);
+
+    // Return property by id (for editing)
+    Property getById(Long id);
 }

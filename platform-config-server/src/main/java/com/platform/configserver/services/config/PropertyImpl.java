@@ -36,4 +36,9 @@ public class PropertyImpl implements PropertyService {
         propertyRepo.deleteById(id);
     }
 
+    @Override
+    public Property getById(Long id) {
+        return propertyRepo.findById(id).orElse(null);
+    }
+
 }

@@ -24,7 +24,7 @@ public class KafkaEventProducerController {
     public String sendMessage(final String topicName,
                               final String key,
                               final Event<String> event) throws ExecutionException, InterruptedException {
-        CompletableFuture<SendResult<String, String>> future = kafkaPublisherService.sendToKafka(topicName, key, event);
+        CompletableFuture<SendResult<String, String>> future = kafkaPublisherService.sendEvent(topicName, key, event);
         return future.get().toString();
     }
 

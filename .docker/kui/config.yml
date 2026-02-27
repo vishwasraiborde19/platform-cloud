@@ -1,0 +1,8 @@
+# Minimal dynamic configuration for kafka-ui
+# See https://github.com/provectuslabs/kafka-ui for full options
+clusters:
+  - name: local
+    # Use the internal service name so kafka-ui (a container) can reach Kafka via the Docker network
+    bootstrapServers: "kafka:9092"
+    # If kafka-ui runs in container and uses host.docker.internal, ensure host resolves inside container
+    # If you want TLS or authentication, configure here

@@ -22,13 +22,16 @@ public class KafkaPublisherService {
       this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void send(String topic, String message){
-        kafkaTemplate.send(topic, message);
+    public void sendEvent(final String destinationTopicName ,
+                          final String rawMessage) {
+        kafkaTemplate.send(destinationTopicName, rawMessage);
     }
 
 
-    public CompletableFuture<SendResult<String, String>> sendToKafka(final String topicName , String key , final Event data) {
-        return kafkaTemplate.send(topicName,key,data.toString());
+    public CompletableFuture<SendResult<String, String>> sendEvent(final String destinationTopicName ,
+                                                                   final String key ,
+                                                                   final Event<String> envelope) {
+        return kafkaTemplate.send(destinationTopicName,key,envelope.toString());
     }
 
 }

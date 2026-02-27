@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Properties - Modern</title>
+  <!-- Tailwind via CDN for quick styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<div class="max-w-6xl mx-auto p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">Properties</h1>
+    <div class="flex items-center space-x-3">
+      <input id="search" type="search" placeholder="Search..." class="px-3 py-2 border rounded-md text-sm w-72" />
+      <button id="addBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm">Add Property</button>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow overflow-hidden">
+    <table class="min-w-full text-sm divide-y">
+      <thead class="bg-gray-100">
+      <tr>
+        <th class="px-4 py-3 text-left">ID</th>
+        <th class="px-4 py-3 text-left">Created</th>
+        <th class="px-4 py-3 text-left">Application</th>
+        <th class="px-4 py-3 text-left">Profile</th>
+        <th class="px-4 py-3 text-left">Label</th>
+        <th class="px-4 py-3 text-left">Key</th>
+        <th class="px-4 py-3 text-left">Value</th>
+        <th class="px-4 py-3 text-right">Actions</th>
+      </tr>
+      </thead>
+      <tbody id="rows" class="divide-y bg-white">
+      <tr th:each="property : ${propertyList}" class="hover:bg-gray-50" th:attr="data-id=${property.id}">
+        <td class="px-4 py-3" th:text="${property.id}"></td>
+        <td class="px-4 py-3" th:text="${property.createdOn != null ? #dates.format(property.createdOn, 'yyyy-MM-dd HH:mm:ss') : ''}"></td>
+        <td class="px-4 py-3" th:text="${property.application}"></td>
+        <td class="px-4 py-3" th:text="${property.profile}"></td>
+        <td class="px-4 py-3" th:text="${property.label}"></td>
+        <td class="px-4 py-3" th:text="${property.propertyKey}"></td>
+        <td class="px-4 py-3" th:text="${property.value}"></td>
+        <td class="px-4 py-3 text-right">
+          <button class="editBtn text-indigo-600 mr-2" data-id="" th:attr="data-id=${property.id}">Edit</button>
+          <button class="deleteBtn text-red-600" th:attr="data-id=${property.id}">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal (hidden by default) -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-lg">
+    <div class="px-6 py-4 border-b">
+      <h2 id="modalTitle" class="text-lg font-medium">Add Property</h2>
+    </div>
+    <div class="p-6">
+      <form id="modalForm" action="/properties/save" method="post" class="space-y-4">
+        <input type="hidden" name="id" id="propId" />
+        <div>
+          <label class="block text-sm text-gray-700">Application</label>
+          <input name="application" id="application" class="mt-1 block w-full border rounded px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Profile</label>
+          <input name="profile" id="profile" class="mt-1 block w-full border rounded px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Label</label>
+          <input name="label" id="label" class="mt-1 block w-full border rounded px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Key</label>
+          <input name="propertyKey" id="propertyKey" class="mt-1 block w-full border rounded px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Value</label>
+          <input name="value" id="value" class="mt-1 block w-full border rounded px-3 py-2 text-sm" />
+        </div>
+      </form>
+    </div>
+    <div class="px-6 py-3 border-t flex justify-end space-x-2">
+      <button id="cancelBtn" class="px-4 py-2 rounded border">Cancel</button>
+      <button id="saveBtn" class="px-4 py-2 rounded bg-indigo-600 text-white">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple client-side search
+  (function () {
+    const search = document.getElementById('search');
+    const rows = Array.from(document.querySelectorAll('#rows tr'));
+    search.addEventListener('input', function () {
+      const q = (this.value || '').toLowerCase().trim();
+      rows.forEach(r => r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none');
+    });
+  })();
+
+  // Modal handling + AJAX save/delete
+  (function () {
+    const modal = document.getElementById('modal');
+    const addBtn = document.getElementById('addBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const form = document.getElementById('modalForm');
+
+    function openModal(title, data) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('propId').value = data && data.id ? data.id : '';
+      document.getElementById('application').value = data && data.application ? data.application : '';
+      document.getElementById('profile').value = data && data.profile ? data.profile : '';
+      document.getElementById('label').value = data && data.label ? data.label : '';
+      document.getElementById('propertyKey').value = data && data.propertyKey ? data.propertyKey : '';
+      document.getElementById('value').value = data && data.value ? data.value : '';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeModal() {
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    addBtn.addEventListener('click', function () { openModal('Add Property', {}); });
+    cancelBtn.addEventListener('click', function (e) { e.preventDefault(); closeModal(); });
+
+    // Edit buttons
+    document.querySelectorAll('.editBtn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+        // Find row data from DOM
+        const tr = this.closest('tr');
+        const cells = tr.children;
+        const data = {
+          id: id,
+          createdOn: cells[1].textContent.trim(),
+          application: cells[2].textContent.trim(),
+          profile: cells[3].textContent.trim(),
+          label: cells[4].textContent.trim(),
+          propertyKey: cells[5].textContent.trim(),
+          value: cells[6].textContent.trim()
+        };
+        openModal('Edit Property', data);
+      });
+    });
+
+    // Delete buttons
+    document.querySelectorAll('.deleteBtn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+        if (!confirm('Delete this property?')) return;
+        fetch(`/properties/delete/${id}`, { method: 'GET' })
+          .then(r => { if (r.redirected) window.location = r.url; else window.location.reload(); })
+          .catch(err => { alert('Delete failed'); console.error(err); });
+      });
+    });
+
+    saveBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      // Save to the new save path
+      const url = '/properties/save';
+      fetch(url, { method: 'POST', body: formData })
+        .then(r => { if (r.redirected) window.location = r.url; else window.location.reload(); })
+        .catch(err => { alert('Save failed'); console.error(err); });
+    });
+
+    // If URL contains ?edit=<id> open modal for that id
+    (function openFromQuery() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const editId = params.get('edit');
+        if (!editId) return;
+        const row = document.querySelector('#rows tr[data-id="' + editId + '"]');
+        if (!row) return;
+        const cells = row.children;
+        const data = {
+          id: editId,
+          createdOn: cells[1].textContent.trim(),
+          application: cells[2].textContent.trim(),
+          profile: cells[3].textContent.trim(),
+          label: cells[4].textContent.trim(),
+          propertyKey: cells[5].textContent.trim(),
+          value: cells[6].textContent.trim()
+        };
+        openModal('Edit Property', data);
+        // remove the edit param from URL to avoid reopening on reload
+        params.delete('edit');
+        const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+        window.history.replaceState({}, document.title, newUrl);
+      } catch (e) {
+        console.warn('Could not open edit modal from URL', e);
+      }
+    })();
+
+  })();
+</script>
+</body>
+</html>
