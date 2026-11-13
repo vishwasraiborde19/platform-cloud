@@ -1,19 +1,24 @@
 package com.platform.configserver.services.config;
 
+import com.platform.configserver.dto.AdminDtos.ApplicationSummary;
+import com.platform.configserver.dto.AdminDtos.PropertyRequest;
 import com.platform.configserver.entities.Property;
 
 import java.util.List;
 
 public interface PropertyService {
 
-    Property addProperty(Property prop);
-
-    Property removeProperty(Property prop);
-
     List<Property> getAll();
+
+    List<Property> find(String application, String profile, String label);
+
+    List<ApplicationSummary> applications();
+
+    Property create(PropertyRequest request);
+
+    Property update(Long id, PropertyRequest request);
 
     void delete(Long id);
 
-    // Return property by id (for editing)
     Property getById(Long id);
 }
